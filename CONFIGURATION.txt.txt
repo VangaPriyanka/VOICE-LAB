@@ -1,0 +1,35 @@
+VOICE LAB - REQUIRED CONFIGURATION
+
+1. Operating System
+- Windows 10 / Windows 11
+
+2. Python Version
+- Python 3.10 or above
+
+3. Required Browser
+- Google Chrome Recommended
+
+4. Required Internet
+- Internet connection required for:
+  - gTTS
+  - Translation API
+
+5. Python Libraries Used
+- flask
+- flask-cors
+- openai-whisper
+- torch
+- gtts
+- deep-translator
+
+6. Installation Command
+pip install -r requirements.txt
+
+7. Run Command
+python app.py
+
+8. Project URL
+http://127.0.0.1:5000
+
+9. Mobile Testing URL
+http://YOUR-IP:5000

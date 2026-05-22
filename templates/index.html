@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" type="image/png" href="/static/favicon.png">
+    <title>VOICELAB</title>
+<button id="themeToggle" class="theme-btn">
+    🌙
+</button>
+    <style>
+        
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin: 0;
+    padding: 0;
+    color: white;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30px 15px;
+
+    animation: fadeIn 1s ease;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: bold;
+}
+.header p {
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.12);
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+
+    animation: fadeInUp 0.7s ease;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+}
+
+/* HEADINGS */
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 15px;
+}
+/* LIGHT MODE */
+
+body.light-mode {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: black;
+}
+
+/* LIGHT MODE CARDS */
+body.light-mode .card {
+    background: rgba(255,255,255,0.7);
+    color: black;
+}
+
+/* LIGHT MODE INPUTS */
+body.light-mode input,
+body.light-mode select {
+    background: white;
+    color: black;
+}
+
+/* LIGHT MODE BUTTONS */
+body.light-mode button {
+    background: #0072ff;
+    color: white;
+}
+
+/* LIGHT MODE RESULT BOX */
+body.light-mode #resultText {
+    background: rgba(0,0,0,0.05);
+    color: black;
+}
+
+/* LIGHT MODE TOAST */
+body.light-mode .toast {
+    background: #0072ff;
+}
+/* THEME BUTTON */
+
+.theme-btn {
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: white;
+    color: black;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+    transition: 0.3s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+
+/* BUTTONS */
+button {
+    padding: 12px 18px;
+    margin: 5px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #00c6ff;
+    color: white;
+
+    cursor: pointer;
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0072ff;
+    transform: scale(1.05);
+}
+
+/* AUDIO */
+audio {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* RESULT TEXT */
+#resultText {
+    margin-top: 15px;
+    background: rgba(255,255,255,0.15);
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* LOADER */
+.loader {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    border: 5px solid #eee;
+    border-top: 5px solid #00c6ff;
+
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+    animation: spin 1s linear infinite;
+
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}
+
+/* TOAST */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    background: #00c6ff;
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+/* ANIMATIONS */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 📱 MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    input, select {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>🎙 VOICELAB</h1>
+    <p>AI Voice • Translate • Generate</p>
+</div>
+
+<div id="loader" class="loader hidden"></div>
+<div id="toast" class="toast hidden"></div>
+
+<div class="container">
+
+<!-- TEXT TO VOICE -->
+<div class="card">
+    <h2>📝 Text to Voice</h2>
+
+    <input id="text" placeholder="Type your text here...">
+
+    <select id="lang">
+        <option value="">Select Language</option>
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="te">Telugu</option>
+        <option value="ta">Tamil</option>
+        <option value="kn">Kannada</option>
+        <option value="ml">Malayalam</option>
+        <option value="bn">Bengali</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="de">German</option>
+        <option value="zh-cn">Chinese</option>
+        <option value="ja">Japanese</option>
+    </select>
+
+    <button onclick="textToSpeech()">Convert</button>
+
+    <audio id="audio1" controls></audio>
+    <button onclick="downloadAudio('audio1')">⬇ Download</button>
+</div>
+
+<!-- VOICE TO TEXT -->
+<div class="card">
+    <h2>🎤 Voice to Text</h2>
+
+    <input type="file" id="audioFile">
+    <button onclick="speechToText()">Upload Convert</button>
+
+    <br><br>
+
+    <button onclick="startRecording()">🎤 Start</button>
+    <button onclick="stopRecording()">⏹ Stop</button>
+
+    <p id="resultText"></p>
+    <button onclick="copyText()">📋 Copy</button>
+</div>
+
+<!-- VOICE TRANSLATOR -->
+<div class="card">
+    <h2>🌐 Voice Translator</h2>
+
+    <input type="file" id="audio2">
+
+    <select id="targetLang">
+        <option value="">Select Language</option>
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="te">Telugu</option>
+        <option value="ta">Tamil</option>
+        <option value="kn">Kannada</option>
+        <option value="ml">Malayalam</option>
+        <option value="bn">Bengali</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="de">German</option>
+        <option value="zh-cn">Chinese</option>
+        <option value="ja">Japanese</option>
+    </select>
+
+    <button onclick="speechToSpeech()">Convert</button>
+
+    <br><br>
+
+    <button onclick="startRecording2()">🎤 Start</button>
+    <button onclick="stopRecording2()">⏹ Stop</button>
+
+    <audio id="audioOutput" controls></audio>
+    <button onclick="downloadAudio('audioOutput')">⬇ Download</button>
+</div>
+
+</div>
+
+<script>
+
+// Loader + Toast
+function showLoader(){document.getElementById("loader").classList.remove("hidden")}
+function hideLoader(){document.getElementById("loader").classList.add("hidden")}
+function showToast(msg){
+    const t=document.getElementById("toast");
+    t.innerText=msg;t.classList.remove("hidden","show");
+    setTimeout(()=>t.classList.add("show"),10);
+    setTimeout(()=>t.classList.remove("show"),2000);
+}
+
+// TEXT → VOICE
+async function textToSpeech(){
+    const text=document.getElementById("text").value;
+    const lang=document.getElementById("lang").value;
+
+    if(!text||!lang){showToast("Select language & text");return;}
+
+    showLoader();
+
+    const formData=new FormData();
+    formData.append("text",text);
+    formData.append("lang",lang);
+
+    const res=await fetch("/text-to-speech",{method:"POST",body:formData});
+    const blob=await res.blob();
+
+    document.getElementById("audio1").src=URL.createObjectURL(blob);
+
+    hideLoader();showToast("Done!");
+}
+
+// VOICE → TEXT
+async function speechToText(){
+    const file=document.getElementById("audioFile").files[0];
+
+    showLoader();
+    document.getElementById("resultText").innerText="Processing...";
+
+    const fd=new FormData();
+    fd.append("audio",file);
+
+    const res=await fetch("/speech-to-text",{method:"POST",body:fd});
+    const data=await res.json();
+
+    document.getElementById("resultText").innerText=data.text;
+
+    hideLoader();showToast("Done!");
+}
+
+// VOICE → SPEECH
+async function speechToSpeech(){
+    const file=document.getElementById("audio2").files[0];
+    const lang=document.getElementById("targetLang").value;
+
+    if(!file||!lang){showToast("Select audio & language");return;}
+
+    showLoader();
+
+    const fd=new FormData();
+    fd.append("audio",file);
+    fd.append("lang",lang);
+
+    const res=await fetch("/speech-to-speech",{method:"POST",body:fd});
+    const blob=await res.blob();
+
+    document.getElementById("audioOutput").src=URL.createObjectURL(blob);
+
+    hideLoader();showToast("Done!");
+}
+// ================= RECORDING =================
+// ================= RECORDING =================
+
+// ---------- VOICE TO TEXT RECORDING ----------
+let recorder1;
+let chunks1 = [];
+
+async function startRecording() {
+
+    try {
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true
+        });
+
+        chunks1 = [];
+
+        recorder1 = new MediaRecorder(stream);
+
+        recorder1.ondataavailable = (e) => {
+
+            if (e.data.size > 0) {
+                chunks1.push(e.data);
+            }
+        };
+
+        recorder1.onstop = async () => {
+
+            try {
+
+                showLoader();
+
+                const blob = new Blob(chunks1, {
+                    type: "audio/webm"
+                });
+
+                const fd = new FormData();
+
+                fd.append("audio", blob, "recording.webm");
+
+                const res = await fetch("/speech-to-text", {
+                    method: "POST",
+                    body: fd
+                });
+
+                const data = await res.json();
+
+                document.getElementById("resultText").innerText =
+                    data.text || data.error;
+
+                hideLoader();
+
+                showToast("Recording Converted!");
+
+            } catch (err) {
+
+                hideLoader();
+
+                showToast("Conversion Failed");
+                console.log(err);
+            }
+        };
+
+        recorder1.start();
+
+        showToast("Recording Started...");
+
+    } catch (err) {
+
+        showToast("Microphone Permission Denied");
+        console.log(err);
+    }
+}
+
+function stopRecording() {
+
+    if (recorder1 && recorder1.state !== "inactive") {
+
+        recorder1.stop();
+
+        showToast("Recording Stopped");
+    }
+}
+
+
+// ---------- VOICE TRANSLATOR RECORDING ----------
+let recorder2;
+let chunks2 = [];
+
+async function startRecording2() {
+
+    try {
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true
+        });
+
+        chunks2 = [];
+
+        recorder2 = new MediaRecorder(stream);
+
+        recorder2.ondataavailable = (e) => {
+
+            if (e.data.size > 0) {
+                chunks2.push(e.data);
+            }
+        };
+
+        recorder2.onstop = async () => {
+
+            try {
+
+                const lang =
+                    document.getElementById("targetLang").value;
+
+                if (!lang) {
+                    showToast("Select language first");
+                    return;
+                }
+
+                showLoader();
+
+                const blob = new Blob(chunks2, {
+                    type: "audio/webm"
+                });
+
+                const fd = new FormData();
+
+                fd.append("audio", blob, "recording.webm");
+                fd.append("lang", lang);
+
+                const res = await fetch("/speech-to-speech", {
+                    method: "POST",
+                    body: fd
+                });
+
+                const audioBlob = await res.blob();
+
+                document.getElementById("audioOutput").src =
+                    URL.createObjectURL(audioBlob);
+
+                hideLoader();
+
+                showToast("Translation Ready!");
+
+            } catch (err) {
+
+                hideLoader();
+
+                showToast("Translation Failed");
+
+                console.log(err);
+            }
+        };
+
+        recorder2.start();
+
+        showToast("Recording Started...");
+
+    } catch (err) {
+
+        showToast("Microphone Permission Denied");
+
+        console.log(err);
+    }
+}
+
+function stopRecording2() {
+
+    if (recorder2 && recorder2.state !== "inactive") {
+
+        recorder2.stop();
+
+        showToast("Recording Stopped");
+    }
+}
+
+// DOWNLOAD
+function downloadAudio(id){
+    const audio=document.getElementById(id);
+    if(!audio.src){showToast("No audio");return;}
+    const a=document.createElement("a");
+    a.href=audio.src;a.download="output.mp3";a.click();
+}
+
+// COPY
+function copyText(){
+    navigator.clipboard.writeText(document.getElementById("resultText").innerText);
+    showToast("Copied!");
+}
+// 🌙 THEME TOGGLE
+
+const themeBtn = document.getElementById("themeToggle");
+
+themeBtn.addEventListener("click", () => {
+
+    // Toggle light mode class
+    document.body.classList.toggle("light-mode");
+
+    // Change icon
+    if (document.body.classList.contains("light-mode")) {
+        themeBtn.innerText = "☀️";
+    } else {
+        themeBtn.innerText = "🌙";
+    }
+
+});
+
+</script>
+
+</body>
+</html>
