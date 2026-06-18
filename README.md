@@ -121,5 +121,5 @@ voice-clone/
 ---
 
 # 👩‍💻 Developed By
-
-Priyanka and Lahari
+MENDA LAHARI
+VANGA PRIYANKA
